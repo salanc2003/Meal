@@ -67,13 +67,13 @@ CREATE TABLE `Restaurant`(
   `Telephone` varchar(12) NOT NULL DEFAULT '', 
   `Adrs` varchar(60) NOT NULL DEFAULT '',
   `URL` varchar(60) NOT NULL DEFAULT '',
-  `GroupID` int(11) NOT NULL,
+  `BlocID` int(11) NOT NULL,
   PRIMARY KEY (`ID`)
 );
 
-DROP TABLE IF EXISTS `GROUP`;
+DROP TABLE IF EXISTS `Bloc`;
 
-CREATE TABLE `GROUP`(
+CREATE TABLE `Bloc`(
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `Name` char(35) NOT NULL DEFAULT '',
   PRIMARY KEY (`ID`)
