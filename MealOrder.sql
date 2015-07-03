@@ -47,6 +47,18 @@ CREATE TABLE `Meal` (
   FOREIGN KEY (MealKindID) REFERENCES MealKind (ID)
 );
 
+DROP TABLE IF EXISTS `MealState`;
+
+CREATE TABLE `MealState`(
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `RestaurantID` int(11) NOT NULL DEFAULT 0,
+  `Name` char(35) NOT NULL DEFAULT '',
+  `OrderID` SMALLINT(5) UNSIGNED NOT NULL,
+  PRIMARY KEY (`ID`),
+  FOREIGN KEY (RestaurantID) REFERENCES Restaurant (ID)
+);
+
+
 DROP TABLE IF EXISTS `OrderMeal`;
 
 CREATE TABLE `OrderMeal`(
@@ -59,7 +71,8 @@ CREATE TABLE `OrderMeal`(
   `OrderTime` DATETIME DEFAULT CURRENT_TIMESTAMP,
   `PayTime` DATETIME,
   `Comment` VARCHAR(200),
-  PRIMARY KEY (`ID`)
+  PRIMARY KEY (`ID`),
+  FOREIGN KEY (RestaurantID) REFERENCES Restaurant (ID)
 );
 
 DROP TABLE IF EXISTS `ExtraMeal`;
@@ -78,12 +91,13 @@ CREATE TABLE `OrderMealDetail`(
   `MealID` int(11) NOT NULL,
   `Amount` SMALLINT(5) NOT NULL DEFAULT 1,
   `ExtraMealID`int(11) DEFAULT 0,
+  `MealStateID` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`ID`),
   FOREIGN KEY (ID) REFERENCES OrderMeal (ID),
-  FOREIGN KEY (ExtraMealID) REFERENCES ExtraMeal (ID)
+  FOREIGN KEY (MealID) REFERENCES Meal (ID),
+  FOREIGN KEY (ExtraMealID) REFERENCES ExtraMeal (ID),
+  FOREIGN KEY (MealStateID) REFERENCES MealState (ID)
 );
-
-
 
 DROP TABLE IF EXISTS `Customer`;
 
