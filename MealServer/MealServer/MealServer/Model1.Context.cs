@@ -13,10 +13,10 @@ namespace MealServer
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class mealorderEntities : DbContext
+    public partial class MealOrderEntities : DbContext
     {
-        public mealorderEntities()
-            : base("name=mealorderEntities")
+        public MealOrderEntities()
+            : base("name=MealOrderEntities")
         {
         }
     
@@ -30,6 +30,7 @@ namespace MealServer
         public DbSet<extrameal> extrameal { get; set; }
         public DbSet<meal> meal { get; set; }
         public DbSet<mealkind> mealkind { get; set; }
+        public DbSet<mealstate> mealstate { get; set; }
         public DbSet<ordermeal> ordermeal { get; set; }
         public DbSet<ordermealdetail> ordermealdetail { get; set; }
         public DbSet<restaurant> restaurant { get; set; }

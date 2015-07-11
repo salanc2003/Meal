@@ -30,7 +30,20 @@ namespace MealServer
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            mSqlMgr.InsertTest();
+
+            bloc aBloc = new bloc();
+            aBloc.Name = "Test12";
+            mSqlMgr.AddBloc(aBloc);
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            //mSqlMgr.UpdateBloc(2,"Test2");
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            //mSqlMgr.DeleteBloc(2);
         }
     }
 }

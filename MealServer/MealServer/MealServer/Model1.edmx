@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="mealorderModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="mealorderModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="mealorderModelStoreContainer">
           <EntitySet Name="bloc" EntityType="mealorderModel.Store.bloc" store:Type="Tables" Schema="mealorder" />
           <EntitySet Name="customer" EntityType="mealorderModel.Store.customer" store:Type="Tables" Schema="mealorder" />
@@ -249,23 +249,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="mealorderModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="mealorderEntities" p1:LazyLoadingEnabled="true">
+        <EntityContainer Name="MealOrderEntities" p1:LazyLoadingEnabled="true">
           <EntitySet Name="bloc" EntityType="mealorderModel.bloc" />
           <EntitySet Name="customer" EntityType="mealorderModel.customer" />
           <EntitySet Name="extrameal" EntityType="mealorderModel.extrameal" />
           <EntitySet Name="meal" EntityType="mealorderModel.meal" />
           <EntitySet Name="mealkind" EntityType="mealorderModel.mealkind" />
+          <EntitySet Name="mealstate" EntityType="mealorderModel.mealstate" />
           <EntitySet Name="ordermeal" EntityType="mealorderModel.ordermeal" />
           <EntitySet Name="ordermealdetail" EntityType="mealorderModel.ordermealdetail" />
           <EntitySet Name="restaurant" EntityType="mealorderModel.restaurant" />
-          <AssociationSet Name="meal_ibfk_1" Association="mealorderModel.meal_ibfk_1">
-            <End Role="mealkind" EntitySet="mealkind" />
-            <End Role="meal" EntitySet="meal" />
-          </AssociationSet>
           <AssociationSet Name="restaurant_ibfk_1" Association="mealorderModel.restaurant_ibfk_1">
             <End Role="bloc" EntitySet="bloc" />
             <End Role="restaurant" EntitySet="restaurant" />
@@ -273,6 +271,10 @@
           <AssociationSet Name="ordermealdetail_ibfk_3" Association="mealorderModel.ordermealdetail_ibfk_3">
             <End Role="extrameal" EntitySet="extrameal" />
             <End Role="ordermealdetail" EntitySet="ordermealdetail" />
+          </AssociationSet>
+          <AssociationSet Name="meal_ibfk_1" Association="mealorderModel.meal_ibfk_1">
+            <End Role="mealkind" EntitySet="mealkind" />
+            <End Role="meal" EntitySet="meal" />
           </AssociationSet>
           <AssociationSet Name="ordermealdetail_ibfk_2" Association="mealorderModel.ordermealdetail_ibfk_2">
             <End Role="meal" EntitySet="meal" />
@@ -282,11 +284,6 @@
             <End Role="restaurant" EntitySet="restaurant" />
             <End Role="mealkind" EntitySet="mealkind" />
           </AssociationSet>
-          <AssociationSet Name="ordermealdetail_ibfk_1" Association="mealorderModel.ordermealdetail_ibfk_1">
-            <End Role="ordermeal" EntitySet="ordermeal" />
-            <End Role="ordermealdetail" EntitySet="ordermealdetail" />
-          </AssociationSet>
-          <EntitySet Name="mealstate" EntityType="mealorderModel.mealstate" />
           <AssociationSet Name="mealstate_ibfk_1" Association="mealorderModel.mealstate_ibfk_1">
             <End Role="restaurant" EntitySet="restaurant" />
             <End Role="mealstate" EntitySet="mealstate" />
@@ -298,6 +295,10 @@
           <AssociationSet Name="ordermeal_ibfk_1" Association="mealorderModel.ordermeal_ibfk_1">
             <End Role="restaurant" EntitySet="restaurant" />
             <End Role="ordermeal" EntitySet="ordermeal" />
+          </AssociationSet>
+          <AssociationSet Name="ordermealdetail_ibfk_1" Association="mealorderModel.ordermealdetail_ibfk_1">
+            <End Role="ordermeal" EntitySet="ordermeal" />
+            <End Role="ordermealdetail" EntitySet="ordermealdetail" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="bloc">
@@ -347,9 +348,20 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="35" Unicode="false" FixedLength="true" />
-          <Property Name="RestaurantID" Type="String" Nullable="false" />
+          <Property Name="RestaurantID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="meal" Relationship="mealorderModel.meal_ibfk_1" FromRole="mealkind" ToRole="meal" />
           <NavigationProperty Name="restaurant" Relationship="mealorderModel.mealkind_ibfk_1" FromRole="mealkind" ToRole="restaurant" />
+        </EntityType>
+        <EntityType Name="mealstate">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="RestaurantID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="35" Unicode="false" FixedLength="true" />
+          <Property Name="OrderID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="restaurant" Relationship="mealorderModel.mealstate_ibfk_1" FromRole="mealstate" ToRole="restaurant" />
+          <NavigationProperty Name="ordermealdetail" Relationship="mealorderModel.ordermealdetail_ibfk_4" FromRole="mealstate" ToRole="ordermealdetail" />
         </EntityType>
         <EntityType Name="ordermeal">
           <Key>
@@ -364,8 +376,8 @@
           <Property Name="OrderTime" Type="DateTime" p1:StoreGeneratedPattern="Identity" Precision="0" />
           <Property Name="PayTime" Type="DateTime" Precision="0" />
           <Property Name="Comment" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
-          <NavigationProperty Name="ordermealdetail" Relationship="mealorderModel.ordermealdetail_ibfk_1" FromRole="ordermeal" ToRole="ordermealdetail" />
           <NavigationProperty Name="restaurant" Relationship="mealorderModel.ordermeal_ibfk_1" FromRole="ordermeal" ToRole="restaurant" />
+          <NavigationProperty Name="ordermealdetail" Relationship="mealorderModel.ordermealdetail_ibfk_1" FromRole="ordermeal" ToRole="ordermealdetail" />
         </EntityType>
         <EntityType Name="ordermealdetail">
           <Key>
@@ -375,11 +387,11 @@
           <Property Name="MealID" Type="Int32" Nullable="false" />
           <Property Name="Amount" Type="Int16" Nullable="false" />
           <Property Name="ExtraMealID" Type="Int32" />
+          <Property Name="MealStateID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="extrameal" Relationship="mealorderModel.ordermealdetail_ibfk_3" FromRole="ordermealdetail" ToRole="extrameal" />
           <NavigationProperty Name="meal" Relationship="mealorderModel.ordermealdetail_ibfk_2" FromRole="ordermealdetail" ToRole="meal" />
-          <NavigationProperty Name="ordermeal" Relationship="mealorderModel.ordermealdetail_ibfk_1" FromRole="ordermealdetail" ToRole="ordermeal" />
-          <Property Type="Int32" Name="MealStateID" Nullable="false" />
           <NavigationProperty Name="mealstate" Relationship="mealorderModel.ordermealdetail_ibfk_4" FromRole="ordermealdetail" ToRole="mealstate" />
+          <NavigationProperty Name="ordermeal" Relationship="mealorderModel.ordermealdetail_ibfk_1" FromRole="ordermealdetail" ToRole="ordermeal" />
         </EntityType>
         <EntityType Name="restaurant">
           <Key>
@@ -396,6 +408,30 @@
           <NavigationProperty Name="mealstate" Relationship="mealorderModel.mealstate_ibfk_1" FromRole="restaurant" ToRole="mealstate" />
           <NavigationProperty Name="ordermeal" Relationship="mealorderModel.ordermeal_ibfk_1" FromRole="restaurant" ToRole="ordermeal" />
         </EntityType>
+        <Association Name="restaurant_ibfk_1">
+          <End Role="bloc" Type="mealorderModel.bloc" Multiplicity="1" />
+          <End Role="restaurant" Type="mealorderModel.restaurant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bloc">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="restaurant">
+              <PropertyRef Name="BlocID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ordermealdetail_ibfk_3">
+          <End Role="extrameal" Type="mealorderModel.extrameal" Multiplicity="0..1" />
+          <End Role="ordermealdetail" Type="mealorderModel.ordermealdetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="extrameal">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ordermealdetail">
+              <PropertyRef Name="ExtraMealID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="meal_ibfk_1">
           <End Role="mealkind" Type="mealorderModel.mealkind" Multiplicity="1" />
           <End Role="meal" Type="mealorderModel.meal" Multiplicity="*" />
@@ -408,33 +444,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="restaurant_ibfk_1">
-          <End Type="mealorderModel.bloc" Role="bloc" Multiplicity="1" />
-          <End Type="mealorderModel.restaurant" Role="restaurant" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="bloc">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="restaurant">
-              <PropertyRef Name="BlocID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="ordermealdetail_ibfk_3">
-          <End Type="mealorderModel.extrameal" Role="extrameal" Multiplicity="0..1" />
-          <End Type="mealorderModel.ordermealdetail" Role="ordermealdetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="extrameal">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="ordermealdetail">
-              <PropertyRef Name="ExtraMealID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="ordermealdetail_ibfk_2">
-          <End Type="mealorderModel.meal" Role="meal" Multiplicity="1" />
-          <End Type="mealorderModel.ordermealdetail" Role="ordermealdetail" Multiplicity="*" />
+          <End Role="meal" Type="mealorderModel.meal" Multiplicity="1" />
+          <End Role="ordermealdetail" Type="mealorderModel.ordermealdetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="meal">
               <PropertyRef Name="ID" />
@@ -445,8 +457,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="mealkind_ibfk_1">
-          <End Type="mealorderModel.restaurant" Role="restaurant" Multiplicity="1" />
-          <End Type="mealorderModel.mealkind" Role="mealkind" Multiplicity="*" />
+          <End Role="restaurant" Type="mealorderModel.restaurant" Multiplicity="1" />
+          <End Role="mealkind" Type="mealorderModel.mealkind" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="restaurant">
               <PropertyRef Name="ID" />
@@ -456,32 +468,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="ordermealdetail_ibfk_1">
-          <End Type="mealorderModel.ordermeal" Role="ordermeal" Multiplicity="1" />
-          <End Type="mealorderModel.ordermealdetail" Role="ordermealdetail" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="ordermeal">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="ordermealdetail">
-              <PropertyRef Name="ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="mealstate">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="RestaurantID" Nullable="false" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="35" FixedLength="true" Unicode="false" />
-          <Property Type="Int32" Name="OrderID" Nullable="false" />
-          <NavigationProperty Name="restaurant" Relationship="mealorderModel.mealstate_ibfk_1" FromRole="mealstate" ToRole="restaurant" />
-          <NavigationProperty Name="ordermealdetail" Relationship="mealorderModel.ordermealdetail_ibfk_4" FromRole="mealstate" ToRole="ordermealdetail" />
-        </EntityType>
         <Association Name="mealstate_ibfk_1">
-          <End Type="mealorderModel.restaurant" Role="restaurant" Multiplicity="1" />
-          <End Type="mealorderModel.mealstate" Role="mealstate" Multiplicity="*" />
+          <End Role="restaurant" Type="mealorderModel.restaurant" Multiplicity="1" />
+          <End Role="mealstate" Type="mealorderModel.mealstate" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="restaurant">
               <PropertyRef Name="ID" />
@@ -492,8 +481,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="ordermealdetail_ibfk_4">
-          <End Type="mealorderModel.mealstate" Role="mealstate" Multiplicity="1" />
-          <End Type="mealorderModel.ordermealdetail" Role="ordermealdetail" Multiplicity="*" />
+          <End Role="mealstate" Type="mealorderModel.mealstate" Multiplicity="1" />
+          <End Role="ordermealdetail" Type="mealorderModel.ordermealdetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="mealstate">
               <PropertyRef Name="ID" />
@@ -504,8 +493,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="ordermeal_ibfk_1">
-          <End Type="mealorderModel.restaurant" Role="restaurant" Multiplicity="1" />
-          <End Type="mealorderModel.ordermeal" Role="ordermeal" Multiplicity="*" />
+          <End Role="restaurant" Type="mealorderModel.restaurant" Multiplicity="1" />
+          <End Role="ordermeal" Type="mealorderModel.ordermeal" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="restaurant">
               <PropertyRef Name="ID" />
@@ -515,12 +504,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="ordermealdetail_ibfk_1">
+          <End Role="ordermeal" Type="mealorderModel.ordermeal" Multiplicity="1" />
+          <End Role="ordermealdetail" Type="mealorderModel.ordermealdetail" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ordermeal">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ordermealdetail">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="mealorderModelStoreContainer" CdmEntityContainer="mealorderEntities">
+        <EntityContainerMapping StorageEntityContainer="mealorderModelStoreContainer" CdmEntityContainer="MealOrderEntities">
           <EntitySetMapping Name="bloc">
             <EntityTypeMapping TypeName="mealorderModel.bloc">
               <MappingFragment StoreEntitySet="bloc">
@@ -571,6 +572,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="mealstate">
+            <EntityTypeMapping TypeName="mealorderModel.mealstate">
+              <MappingFragment StoreEntitySet="mealstate">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RestaurantID" ColumnName="RestaurantID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ordermeal">
             <EntityTypeMapping TypeName="mealorderModel.ordermeal">
               <MappingFragment StoreEntitySet="ordermeal">
@@ -589,11 +600,11 @@
           <EntitySetMapping Name="ordermealdetail">
             <EntityTypeMapping TypeName="mealorderModel.ordermealdetail">
               <MappingFragment StoreEntitySet="ordermealdetail">
-                <ScalarProperty Name="MealStateID" ColumnName="MealStateID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="MealID" ColumnName="MealID" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="ExtraMealID" ColumnName="ExtraMealID" />
+                <ScalarProperty Name="MealStateID" ColumnName="MealStateID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -606,16 +617,6 @@
                 <ScalarProperty Name="Adrs" ColumnName="Adrs" />
                 <ScalarProperty Name="URL" ColumnName="URL" />
                 <ScalarProperty Name="BlocID" ColumnName="BlocID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="mealstate">
-            <EntityTypeMapping TypeName="mealorderModel.mealstate">
-              <MappingFragment StoreEntitySet="mealstate">
-                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="RestaurantID" ColumnName="RestaurantID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

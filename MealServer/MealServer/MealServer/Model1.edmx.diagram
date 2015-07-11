@@ -4,25 +4,25 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="93de58811af846d2b2febcfeca0635d8" Name="圖表1">
-        <EntityTypeShape EntityType="mealorderModel.bloc" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="mealorderModel.customer" Width="1.5" PointX="0.625" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="mealorderModel.extrameal" Width="1.5" PointX="6.375" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="mealorderModel.meal" Width="1.5" PointX="7.375" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="mealorderModel.mealkind" Width="1.5" PointX="5.125" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="mealorderModel.ordermeal" Width="1.5" PointX="2.5" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="mealorderModel.ordermealdetail" Width="1.5" PointX="4.5" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="mealorderModel.restaurant" Width="1.5" PointX="2.625" PointY="1.25" IsExpanded="true" />
+      <Diagram DiagramId="b6458e3418dd426ea6d99ec498c5d7d7" Name="圖表1">
+        <EntityTypeShape EntityType="mealorderModel.bloc" Width="1.5" PointX="0.875" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="mealorderModel.customer" Width="1.5" PointX="0.875" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="mealorderModel.extrameal" Width="1.5" PointX="9.25" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="mealorderModel.meal" Width="1.5" PointX="7.375" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="mealorderModel.mealkind" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="mealorderModel.mealstate" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="mealorderModel.ordermeal" Width="1.5" PointX="5.125" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="mealorderModel.ordermealdetail" Width="1.5" PointX="7.375" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="mealorderModel.restaurant" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <AssociationConnector Association="mealorderModel.restaurant_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="mealorderModel.ordermealdetail_ibfk_3" ManuallyRouted="false" />
         <AssociationConnector Association="mealorderModel.meal_ibfk_1" ManuallyRouted="false" />
-        <AssociationConnector Association="mealorderModel.restaurant_ibfk_1" />
-        <AssociationConnector Association="mealorderModel.ordermealdetail_ibfk_3" />
-        <AssociationConnector Association="mealorderModel.ordermealdetail_ibfk_2" />
-        <AssociationConnector Association="mealorderModel.mealkind_ibfk_1" />
-        <AssociationConnector Association="mealorderModel.ordermealdetail_ibfk_1" />
-        <EntityTypeShape EntityType="mealorderModel.mealstate" Width="1.5" PointX="4.5" PointY="3.5" />
-        <AssociationConnector Association="mealorderModel.mealstate_ibfk_1" />
-        <AssociationConnector Association="mealorderModel.ordermealdetail_ibfk_4" />
-        <AssociationConnector Association="mealorderModel.ordermeal_ibfk_1" />
+        <AssociationConnector Association="mealorderModel.ordermealdetail_ibfk_2" ManuallyRouted="false" />
+        <AssociationConnector Association="mealorderModel.mealkind_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="mealorderModel.mealstate_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="mealorderModel.ordermealdetail_ibfk_4" ManuallyRouted="false" />
+        <AssociationConnector Association="mealorderModel.ordermeal_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="mealorderModel.ordermealdetail_ibfk_1" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
